@@ -1,0 +1,16 @@
+{
+  "name": "elm-pert",
+  "version": "0.0.1",
+  "description": "A PERT estimation tool written in Elm",
+  "author": "Robert Looby <robertjlooby@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robertjlooby/elm-pert"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "elm-test": "^0.2.0"
+  },
+  "license": "MIT"
+}
