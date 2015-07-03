@@ -4,7 +4,8 @@
     "repository": "https://github.com/robertjlooby/elm-pert.git",
     "license": "MIT",
     "source-directories": [
-        "src"
+        "src",
+        "test"
     ],
     "exposed-modules": [],
     "dependencies": {
