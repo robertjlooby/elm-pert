@@ -1,5 +1,22 @@
 module Pert where
 
+import Html exposing (Html, div, input, text)
+import Html.Attributes exposing (placeholder)
+import Html.Events exposing (on, targetValue)
+import Json.Decode exposing (..)
+import Maybe exposing (withDefault)
+import Result exposing (toMaybe)
+import StartApp exposing (start)
+import String exposing (toInt)
+
+main =
+  StartApp.start
+    { model = emptyModel
+    , update = update
+    , view = view
+    }
+
+
 -- Model
 type alias Model =
   { optimistic : Int
@@ -59,3 +76,27 @@ weightedMean model =
 standardDeviation : Model -> Float
 standardDeviation model =
   (toFloat (model.pessimistic - model.optimistic)) / 6
+
+parseValue : String -> Int
+parseValue str =
+  toInt str |> toMaybe |> withDefault 0
+
+view : Signal.Address Action -> Model -> Html
+view address model = div []
+                       [ input
+                           [ placeholder "Optimistic"
+                           , on "input" targetValue (parseValue >> UpdateOptimistic >> Signal.message address)
+                           ]
+                           []
+                       , input
+                           [ placeholder "Realistic"
+                           , on "input" targetValue (parseValue >> UpdateRealistic >> Signal.message address)
+                           ]
+                           []
+                       , input
+                           [ placeholder "Pessimistic"
+                           , on "input" targetValue (parseValue >> UpdatePessimistic >> Signal.message address)
+                           ]
+                           []
+                       , div [] [text (toString model.combined)]
+                       ]

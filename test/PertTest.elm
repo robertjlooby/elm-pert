@@ -36,6 +36,12 @@ tests =
         , (test "returns 2.5 for 2/2/3" (ae 2.5 (rawScore (model 2 2 3))))
         , (test "returns 3.33 for 1/3/3" (assertWithin (10 / 3) (rawScore (model 1 3 3)) 0.001))
         ])
+    , (suite "parseValue"
+        [ (test "returns 0 for emptyString" (ae 0 (parseValue "")))
+        , (test "returns 0 for badInput" (ae 0 (parseValue "bad")))
+        , (test "returns 0 for 0" (ae 0 (parseValue "0")))
+        , (test "returns 2 for 2" (ae 2 (parseValue "2")))
+        ])
     ]
 
 ae = assertEqual
