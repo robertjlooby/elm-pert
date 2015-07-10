@@ -1,7 +1,7 @@
 module Pert where
 
 import Html exposing (button, Html, div, input, text)
-import Html.Attributes exposing (placeholder, value)
+import Html.Attributes exposing (autofocus, placeholder, value)
 import Html.Events exposing (on, onClick, targetValue)
 import Maybe exposing (withDefault)
 import Result exposing (toMaybe)
@@ -95,6 +95,7 @@ view address model = div []
                            [ placeholder "Optimistic"
                            , on "input" targetValue (parseValue >> UpdateOptimistic >> Signal.message address)
                            , value (valueDisplay model.optimistic)
+                           , autofocus True
                            ]
                            []
                        , input
