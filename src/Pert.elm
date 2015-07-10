@@ -1,7 +1,7 @@
 module Pert where
 
-import Html exposing (button, Html, div, input, text)
-import Html.Attributes exposing (autofocus, placeholder, size, value)
+import Html exposing (Attribute, button, Html, div, input, text)
+import Html.Attributes exposing (autofocus, placeholder, size, style, value)
 import Html.Events exposing (on, onClick, targetValue)
 import Maybe exposing (withDefault)
 import Result exposing (toMaybe)
@@ -90,13 +90,14 @@ valueDisplay val =
     _ -> toString val
 
 view : Signal.Address Action -> Model -> Html
-view address model = div []
+view address model = div [ containerStyle ]
                        [ input
                            [ placeholder "Optimistic"
                            , on "input" targetValue (parseValue >> UpdateOptimistic >> Signal.message address)
                            , value (valueDisplay model.optimistic)
                            , autofocus True
                            , size 11
+                           , inputStyle
                            ]
                            []
                        , input
@@ -104,6 +105,7 @@ view address model = div []
                            , on "input" targetValue (parseValue >> UpdateRealistic >> Signal.message address)
                            , value (valueDisplay model.realistic)
                            , size 11
+                           , inputStyle
                            ]
                            []
                        , input
@@ -111,8 +113,34 @@ view address model = div []
                            , on "input" targetValue (parseValue >> UpdatePessimistic >> Signal.message address)
                            , value (valueDisplay model.pessimistic)
                            , size 11
+                           , inputStyle
                            ]
                            []
                        , button [ onClick address Reset ] [ text "Reset" ]
-                       , div [] [text (toString model.combined)]
+                       , div [ resultStyle ] [ text <| (toString model.combined) ++ " Points" ]
                        ]
+
+containerStyle : Attribute
+containerStyle =
+  style
+    [ ("position", "absolute")
+    , ("top", "50%")
+    , ("left", "50%")
+    , ("margin-right", "-50%")
+    , ("transform", "translate(-50%, -50%)")
+    ]
+
+inputStyle : Attribute
+inputStyle =
+  style
+    [ ("margin-right", "10px") ]
+
+resultStyle : Attribute
+resultStyle =
+  style
+    [ ("position", "absolute")
+    , ("top", "300%")
+    , ("left", "50%")
+    , ("margin-right", "-50%")
+    , ("transform", "translate(-50%, -50%)")
+    ]

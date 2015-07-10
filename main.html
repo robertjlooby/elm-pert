@@ -12284,6 +12284,39 @@ Elm.Pert.make = function (_elm) {
    $Signal = Elm.Signal.make(_elm),
    $StartApp = Elm.StartApp.make(_elm),
    $String = Elm.String.make(_elm);
+   var resultStyle = $Html$Attributes.style(_L.fromArray([{ctor: "_Tuple2"
+                                                          ,_0: "position"
+                                                          ,_1: "absolute"}
+                                                         ,{ctor: "_Tuple2"
+                                                          ,_0: "top"
+                                                          ,_1: "300%"}
+                                                         ,{ctor: "_Tuple2"
+                                                          ,_0: "left"
+                                                          ,_1: "50%"}
+                                                         ,{ctor: "_Tuple2"
+                                                          ,_0: "margin-right"
+                                                          ,_1: "-50%"}
+                                                         ,{ctor: "_Tuple2"
+                                                          ,_0: "transform"
+                                                          ,_1: "translate(-50%, -50%)"}]));
+   var inputStyle = $Html$Attributes.style(_L.fromArray([{ctor: "_Tuple2"
+                                                         ,_0: "margin-right"
+                                                         ,_1: "10px"}]));
+   var containerStyle = $Html$Attributes.style(_L.fromArray([{ctor: "_Tuple2"
+                                                             ,_0: "position"
+                                                             ,_1: "absolute"}
+                                                            ,{ctor: "_Tuple2"
+                                                             ,_0: "top"
+                                                             ,_1: "50%"}
+                                                            ,{ctor: "_Tuple2"
+                                                             ,_0: "left"
+                                                             ,_1: "50%"}
+                                                            ,{ctor: "_Tuple2"
+                                                             ,_0: "margin-right"
+                                                             ,_1: "-50%"}
+                                                            ,{ctor: "_Tuple2"
+                                                             ,_0: "transform"
+                                                             ,_1: "translate(-50%, -50%)"}]));
    var valueDisplay = function (val) {
       return function () {
          switch (val)
@@ -12329,7 +12362,7 @@ Elm.Pert.make = function (_elm) {
    var view = F2(function (address,
    model) {
       return A2($Html.div,
-      _L.fromArray([]),
+      _L.fromArray([containerStyle]),
       _L.fromArray([A2($Html.input,
                    _L.fromArray([$Html$Attributes.placeholder("Optimistic")
                                 ,A3($Html$Events.on,
@@ -12340,7 +12373,8 @@ Elm.Pert.make = function (_elm) {
                                 })
                                 ,$Html$Attributes.value(valueDisplay(model.optimistic))
                                 ,$Html$Attributes.autofocus(true)
-                                ,$Html$Attributes.size(11)]),
+                                ,$Html$Attributes.size(11)
+                                ,inputStyle]),
                    _L.fromArray([]))
                    ,A2($Html.input,
                    _L.fromArray([$Html$Attributes.placeholder("Realistic")
@@ -12351,7 +12385,8 @@ Elm.Pert.make = function (_elm) {
                                    return $Signal.message(address)(UpdateRealistic(parseValue($)));
                                 })
                                 ,$Html$Attributes.value(valueDisplay(model.realistic))
-                                ,$Html$Attributes.size(11)]),
+                                ,$Html$Attributes.size(11)
+                                ,inputStyle]),
                    _L.fromArray([]))
                    ,A2($Html.input,
                    _L.fromArray([$Html$Attributes.placeholder("Pessimistic")
@@ -12362,7 +12397,8 @@ Elm.Pert.make = function (_elm) {
                                    return $Signal.message(address)(UpdatePessimistic(parseValue($)));
                                 })
                                 ,$Html$Attributes.value(valueDisplay(model.pessimistic))
-                                ,$Html$Attributes.size(11)]),
+                                ,$Html$Attributes.size(11)
+                                ,inputStyle]),
                    _L.fromArray([]))
                    ,A2($Html.button,
                    _L.fromArray([A2($Html$Events.onClick,
@@ -12370,8 +12406,10 @@ Elm.Pert.make = function (_elm) {
                    Reset)]),
                    _L.fromArray([$Html.text("Reset")]))
                    ,A2($Html.div,
-                   _L.fromArray([]),
-                   _L.fromArray([$Html.text($Basics.toString(model.combined))]))]));
+                   _L.fromArray([resultStyle]),
+                   _L.fromArray([$Html.text(A2($Basics._op["++"],
+                   $Basics.toString(model.combined),
+                   " Points"))]))]));
    });
    var emptyModel = {_: {}
                     ,combined: 0
@@ -12444,7 +12482,10 @@ Elm.Pert.make = function (_elm) {
                       ,standardDeviation: standardDeviation
                       ,parseValue: parseValue
                       ,valueDisplay: valueDisplay
-                      ,view: view};
+                      ,view: view
+                      ,containerStyle: containerStyle
+                      ,inputStyle: inputStyle
+                      ,resultStyle: resultStyle};
    return _elm.Pert.values;
 };Elm.Result = Elm.Result || {};
 Elm.Result.make = function (_elm) {
