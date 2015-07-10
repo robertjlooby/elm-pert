@@ -12339,7 +12339,8 @@ Elm.Pert.make = function (_elm) {
                                    return $Signal.message(address)(UpdateOptimistic(parseValue($)));
                                 })
                                 ,$Html$Attributes.value(valueDisplay(model.optimistic))
-                                ,$Html$Attributes.autofocus(true)]),
+                                ,$Html$Attributes.autofocus(true)
+                                ,$Html$Attributes.size(11)]),
                    _L.fromArray([]))
                    ,A2($Html.input,
                    _L.fromArray([$Html$Attributes.placeholder("Realistic")
@@ -12349,7 +12350,8 @@ Elm.Pert.make = function (_elm) {
                                 function ($) {
                                    return $Signal.message(address)(UpdateRealistic(parseValue($)));
                                 })
-                                ,$Html$Attributes.value(valueDisplay(model.realistic))]),
+                                ,$Html$Attributes.value(valueDisplay(model.realistic))
+                                ,$Html$Attributes.size(11)]),
                    _L.fromArray([]))
                    ,A2($Html.input,
                    _L.fromArray([$Html$Attributes.placeholder("Pessimistic")
@@ -12359,7 +12361,8 @@ Elm.Pert.make = function (_elm) {
                                 function ($) {
                                    return $Signal.message(address)(UpdatePessimistic(parseValue($)));
                                 })
-                                ,$Html$Attributes.value(valueDisplay(model.pessimistic))]),
+                                ,$Html$Attributes.value(valueDisplay(model.pessimistic))
+                                ,$Html$Attributes.size(11)]),
                    _L.fromArray([]))
                    ,A2($Html.button,
                    _L.fromArray([A2($Html$Events.onClick,

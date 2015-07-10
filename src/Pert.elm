@@ -1,7 +1,7 @@
 module Pert where
 
 import Html exposing (button, Html, div, input, text)
-import Html.Attributes exposing (autofocus, placeholder, value)
+import Html.Attributes exposing (autofocus, placeholder, size, value)
 import Html.Events exposing (on, onClick, targetValue)
 import Maybe exposing (withDefault)
 import Result exposing (toMaybe)
@@ -96,18 +96,21 @@ view address model = div []
                            , on "input" targetValue (parseValue >> UpdateOptimistic >> Signal.message address)
                            , value (valueDisplay model.optimistic)
                            , autofocus True
+                           , size 11
                            ]
                            []
                        , input
                            [ placeholder "Realistic"
                            , on "input" targetValue (parseValue >> UpdateRealistic >> Signal.message address)
                            , value (valueDisplay model.realistic)
+                           , size 11
                            ]
                            []
                        , input
                            [ placeholder "Pessimistic"
                            , on "input" targetValue (parseValue >> UpdatePessimistic >> Signal.message address)
                            , value (valueDisplay model.pessimistic)
+                           , size 11
                            ]
                            []
                        , button [ onClick address Reset ] [ text "Reset" ]
