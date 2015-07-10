@@ -19,6 +19,7 @@ tests =
         , (test "updates the combined value" (assertWithin 2.75 (.combined (update (UpdateOptimistic 1) (model 0 2 3))) 0.001))
         , (test "updates the combined value" (assertWithin 2.75 (.combined (update (UpdateRealistic 2) (model 1 0 3))) 0.001))
         , (test "updates the combined value" (assertWithin 2.75 (.combined (update (UpdatePessimistic 3) (model 1 2 0))) 0.001))
+        , (test "resets the model" (ae emptyModel (update Reset (model 1 2 3))))
         ])
     , (suite "calculateCombined"
         [ (test "returns 0 if optimistic is 0" (ae 0 (calculateCombined (model 0 2 3))))
@@ -41,6 +42,10 @@ tests =
         , (test "returns 0 for badInput" (ae 0 (parseValue "bad")))
         , (test "returns 0 for 0" (ae 0 (parseValue "0")))
         , (test "returns 2 for 2" (ae 2 (parseValue "2")))
+        ])
+    , (suite "valueDisplay"
+        [ (test "returns empty string for 0" (ae "" (valueDisplay 0)))
+        , (test "returns 2 string for 2" (ae "2" (valueDisplay 2)))
         ])
     ]
 

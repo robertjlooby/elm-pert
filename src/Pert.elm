@@ -1,9 +1,8 @@
 module Pert where
 
-import Html exposing (Html, div, input, text)
-import Html.Attributes exposing (placeholder)
-import Html.Events exposing (on, targetValue)
-import Json.Decode exposing (..)
+import Html exposing (button, Html, div, input, text)
+import Html.Attributes exposing (placeholder, value)
+import Html.Events exposing (on, onClick, targetValue)
 import Maybe exposing (withDefault)
 import Result exposing (toMaybe)
 import StartApp exposing (start)
@@ -35,13 +34,16 @@ emptyModel =
 
 -- Update
 type Action
-  = UpdateOptimistic Int
+  = Reset
+  | UpdateOptimistic Int
   | UpdateRealistic Int
   | UpdatePessimistic Int
 
 update : Action -> Model -> Model
 update action model =
   case action of
+    Reset ->
+      emptyModel
     UpdateOptimistic value ->
       let newModel = { model | optimistic <- value }
       in  { newModel | combined <- calculateCombined newModel }
@@ -81,22 +83,32 @@ parseValue : String -> Int
 parseValue str =
   toInt str |> toMaybe |> withDefault 0
 
+valueDisplay : Int -> String
+valueDisplay val =
+  case val of
+    0 -> ""
+    _ -> toString val
+
 view : Signal.Address Action -> Model -> Html
 view address model = div []
                        [ input
                            [ placeholder "Optimistic"
                            , on "input" targetValue (parseValue >> UpdateOptimistic >> Signal.message address)
+                           , value (valueDisplay model.optimistic)
                            ]
                            []
                        , input
                            [ placeholder "Realistic"
                            , on "input" targetValue (parseValue >> UpdateRealistic >> Signal.message address)
+                           , value (valueDisplay model.realistic)
                            ]
                            []
                        , input
                            [ placeholder "Pessimistic"
                            , on "input" targetValue (parseValue >> UpdatePessimistic >> Signal.message address)
+                           , value (valueDisplay model.pessimistic)
                            ]
                            []
+                       , button [ onClick address Reset ] [ text "Reset" ]
                        , div [] [text (toString model.combined)]
                        ]
