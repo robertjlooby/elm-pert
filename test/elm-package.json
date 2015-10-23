@@ -1,16 +1,19 @@
 {
     "version": "0.0.1",
-    "summary": "A PERT estimation tool written in Elm",
+    "summary": "Tests for elm-pert",
     "repository": "https://github.com/robertjlooby/elm-pert.git",
     "license": "MIT",
     "source-directories": [
-        "src"
+        "../src",
+        "."
     ],
     "exposed-modules": [],
     "dependencies": {
+        "deadfoxygrandpa/Elm-Test": "1.0.4 <= v < 2.0.0",
         "elm-lang/core": "2.0.0 <= v < 3.0.0",
         "evancz/elm-html": "3.0.0 <= v < 4.0.0",
-        "evancz/start-app": "1.0.0 <= v < 2.0.0"
+        "evancz/start-app": "1.0.0 <= v < 2.0.0",
+        "maxsnew/IO": "1.0.1 <= v < 2.0.0"
     },
     "elm-version": "0.15.0 <= v < 0.16.0"
 }
